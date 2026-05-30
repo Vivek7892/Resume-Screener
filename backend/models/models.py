@@ -14,7 +14,7 @@ class Candidate(Base):
     __tablename__ = "candidates"
 
     id = Column(Integer, primary_key=True, index=True)
-    session_id = Column(String(100), index=True)          # groups candidates per analysis run
+    session_id = Column(String(100), index=True)
     name = Column(String(255))
     filename = Column(String(255))
     file_path = Column(String(500))
@@ -26,5 +26,9 @@ class Candidate(Base):
     match_score = Column(Float, default=0.0)
     matching_skills = Column(JSON, default=[])
     missing_skills = Column(JSON, default=[])
+    skills_score = Column(Float, default=0.0)
+    semantic_score = Column(Float, default=0.0)
+    experience_score = Column(Float, default=0.0)
+    education_score = Column(Float, default=0.0)
     rank = Column(Integer, default=0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

@@ -69,4 +69,9 @@ def _serialize(c: Candidate) -> dict:
         "missing_skills": c.missing_skills,
         "rank": c.rank,
         "created_at": str(c.created_at),
+        "skills_score": c.skills_score,
+        "semantic_score": c.semantic_score,
+        "experience_score": c.experience_score,
+        "education_score": c.education_score,
+        "keyword_score": c.semantic_score,  # alias for frontend
     }
