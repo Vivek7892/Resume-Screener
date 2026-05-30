@@ -1,12 +1,10 @@
 import axios from "axios";
 import { UploadResponse, AnalyzeResponse, Candidate } from "@/app/types";
 
-// In production (Render), NEXT_PUBLIC_API_URL points directly to the backend.
-// In dev, Next.js rewrites /api/* → localhost:8000/* via next.config.mjs.
-const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL
-    ? process.env.NEXT_PUBLIC_API_URL
-    : "/api";
+// Always use /api in the browser — the catch-all route handler at
+// app/api/[...path]/route.ts streams requests to FastAPI with no size limit.
+// In production set NEXT_PUBLIC_API_URL to your backend URL directly.
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
 
 const api = axios.create({ baseURL: BASE_URL });
 
@@ -43,8 +41,11 @@ export async function getResults(params?: {
 }
 
 export function exportCSV(session_id?: string) {
-  const base = process.env.NEXT_PUBLIC_API_URL || "";
-  const url = new URL(`${base}/results/export`, window.location.origin);
+  // Build URL relative to current origin so it goes through the proxy
+  const base = process.env.NEXT_PUBLIC_API_URL
+    ? process.env.NEXT_PUBLIC_API_URL
+    : `${window.location.origin}/api`;
+  const url = new URL(`${base}/results/export`);
   if (session_id) url.searchParams.set("session_id", session_id);
   window.open(url.toString(), "_blank");
 }

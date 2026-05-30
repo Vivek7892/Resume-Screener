@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"}/:path*`,
-      },
-    ];
+  // Removed rewrites — replaced by app/api/[...path]/route.ts which streams
+  // requests directly to FastAPI with no body-size limit.
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "50mb",
+    },
   },
 };
 

@@ -19,7 +19,7 @@ services:
           name: resume-screener-db
           property: connectionString
       - key: ALLOWED_ORIGINS
-        sync: false   # set manually in Render dashboard to your frontend URL
+        sync:https://resume-screener-1-0hr4.onrender.com   # set manually in Render dashboard to your frontend URL
 
   # ── Frontend (Next.js) ────────────────────────────────────────────────────
   - type: web
@@ -31,4 +31,4 @@ services:
     plan: free
     envVars:
       - key: NEXT_PUBLIC_API_URL
-        sync: false   # set manually to your backend Render URL, e.g. https://resumerank-backend.onrender.com
+        sync: https://resume-screener-0r19.onrender.com   # set manually to your backend Render URL, e.g. https://resumerank-backend.onrender.com
