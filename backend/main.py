@@ -14,9 +14,6 @@ from routes.results import router as results_router
 
 load_dotenv()
 
-# Create tables
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI(title="Resume Screener API", version="1.0.0")
 
 # ── CORS ─────────────────────────────────────────────────────────────────────
@@ -52,6 +49,10 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 @app.on_event("startup")
 def on_startup():
+    try:
+        Base.metadata.create_all(bind=engine)
+    except Exception as e:
+        print(f"[DB] Table creation failed: {e}")
     test_connection()
 
 
