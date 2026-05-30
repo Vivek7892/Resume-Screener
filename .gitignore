@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+env/
+*.env
+
+# Keep .env as example — actual secrets excluded
+backend/.env
+
+# Node
+node_modules/
+.npm/
+
+# Next.js
+frontend/.next/
+frontend/out/
+
+# Uploads (runtime data — not source code)
+backend/uploads/resumes/*
+backend/uploads/jd/*
+!backend/uploads/resumes/.gitkeep
+!backend/uploads/jd/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
